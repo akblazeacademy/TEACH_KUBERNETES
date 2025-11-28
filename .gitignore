@@ -1,0 +1,6 @@
+.ssh/
+.cache/
+.sudo_as_admin_successful
+.bashrc
+.profile
+.bash_logout
