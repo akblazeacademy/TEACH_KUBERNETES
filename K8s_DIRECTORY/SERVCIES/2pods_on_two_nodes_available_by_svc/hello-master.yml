@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-master
+  template:
+    metadata:
+      labels:
+        app: hello-master
+    spec:
+      nodeSelector:
+        node-type: master
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            echo "Hello from MASTER - $(hostname)" > /usr/share/nginx/html/index.html;
+            nginx -g 'daemon off;';
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-master-svc
+spec:
+  selector:
+    app: hello-master
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30081
+

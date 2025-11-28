@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-clusterip
+spec:
+  selector:
+    app: webapp
+  ports:
+  - name: c01-nginx
+    port: 80
+    targetPort: 80
+  - name: c02-python
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
+

@@ -1,0 +1,5 @@
+sudo apt install dos2unix -y
+dos2unix sslbased.sh
+nslookup akblazeacademy.net
+ 
+

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod-1
+  labels:
+    app: webapp
+spec:
+  containers:
+  - name: python-app
+    image: python:3.9-slim
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo "Hello — You hit Pod1" > index.html
+        python3 -m http.server 5000
+    ports:
+    - containerPort: 5000
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod-2
+  labels:
+    app: webapp
+spec:
+  containers:
+  - name: python-app
+    image: python:3.9-slim
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo "Hello — You hit Pod2" > index.html
+        python3 -m http.server 5000
+    ports:
+    - containerPort: 5000
+

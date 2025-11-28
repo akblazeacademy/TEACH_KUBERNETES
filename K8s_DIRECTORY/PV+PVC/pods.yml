@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shared-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shared-test
+  template:
+    metadata:
+      labels:
+        app: shared-test
+    spec:
+      affinity:
+        podAntiAffinity:       # prevent two pods on same node
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - shared-test
+            topologyKey: kubernetes.io/hostname
+
+      containers:
+      - name: test
+        image: nginx
+        volumeMounts:
+        - name: shared-volume
+          mountPath: /mnt/data
+
+      volumes:
+      - name: shared-volume
+        persistentVolumeClaim:
+          claimName: azurefile-pvc
+

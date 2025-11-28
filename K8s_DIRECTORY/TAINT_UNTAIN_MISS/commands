@@ -1,0 +1,4 @@
+kubectl label node master node-type=master
+kubectl taint nodes master node-role.kubernetes.io/control-plane-
+kubectl describe node master | grep Taint
+

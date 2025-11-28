@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-worker
+  template:
+    metadata:
+      labels:
+        app: hello-worker
+    spec:
+      nodeSelector:
+        node-type: worker
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            echo "Hello from WORKER - $(hostname)" > /usr/share/nginx/html/index.html;
+            nginx -g 'daemon off;';
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-worker-svc
+spec:
+  selector:
+    app: hello-worker
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30082
+

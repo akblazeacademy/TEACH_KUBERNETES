@@ -1,0 +1,14 @@
+storage account name : warrisonblazex123
+fileshare name : warrisonblaze
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+az login
+az storage account keys list --resource-group <rg-name> --account-name <storageaccountname> -o table
+kubectl create secret generic azure-secret   --from-literal=azurestorageaccountname=warrisonblazex123   --from-literal=azurestorageaccountkey="key1"
+sudo apt update
+sudo apt install -y cifs-utils
+fileshare connect
+git clone https://github.com/kubernetes-sigs/azurefile-csi-driver.git
+cd azurefile-csi-driver/deploy/
+kubectl apply -f .
+
+
