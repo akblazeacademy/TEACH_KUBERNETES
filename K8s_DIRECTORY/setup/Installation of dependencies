@@ -1,2 +1,8 @@
 ###Install AZURE CLI
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+###dos2unix installation to run windows script via linux
+sudo apt update
+sudo apt install -y dos2unix
+dos2unix aks_cluster_setup.sh
+bash aks_cluster_setup.sh
