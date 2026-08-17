@@ -33,8 +33,8 @@ docker info
 ## 2. Create the Demo Directory
 
 ```bash
-mkdir -p ~/docker-root-volume-demo
-cd ~/docker-root-volume-demo
+mkdir -p docker-root-volume-demo
+cd docker-root-volume-demo
 ```
 
 Verify:
