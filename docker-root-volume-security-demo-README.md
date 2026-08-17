@@ -135,24 +135,24 @@ exit
 
 ## 6. Create a Host Directory
 
-Use `/opt` to prove that the host path does **not** have to be under `/root`.
+ prove that the host path does **not** have to be under `/root`.
 
 On the Docker host:
 
 ```bash
-sudo mkdir -p /opt/docker-root-demo
+sudo mkdir -p docker-root-demo
 ```
 
 Create a file:
 
 ```bash
-echo "IMPORTANT HOST DATA" | sudo tee /opt/docker-root-demo/secret.txt
+echo "IMPORTANT HOST DATA" | sudo tee docker-root-demo/secret.txt
 ```
 
 Read it:
 
 ```bash
-cat /opt/docker-root-demo/secret.txt
+cat docker-root-demo/secret.txt
 ```
 
 Expected:
@@ -164,7 +164,7 @@ IMPORTANT HOST DATA
 Check permissions:
 
 ```bash
-ls -ln /opt/docker-root-demo/secret.txt
+ls -ln docker-root-demo/secret.txt
 ```
 
 ---
@@ -175,7 +175,7 @@ ls -ln /opt/docker-root-demo/secret.txt
 
 ```bash
 docker run --rm -it \
-  -v /opt/docker-root-demo:/data \
+  -v docker-root-demo:/data \
   root-demo
 ```
 
@@ -242,7 +242,7 @@ exit
 Now check the file from the **host**:
 
 ```bash
-cat /opt/docker-root-demo/secret.txt
+cat docker-root-demo/secret.txt
 ```
 
 Expected:
